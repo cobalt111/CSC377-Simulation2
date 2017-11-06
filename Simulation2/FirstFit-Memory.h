@@ -96,7 +96,7 @@ int FFMemory::allocate_memory(int process_id, int num_units) {
 				nodes_traversed += nodesTraversed_local;
 				return nodesTraversed_local;
 			}
-		
+
 		}
 		walkPointer = walkPointer->next;
 		nodesTraversed_local++;
@@ -106,15 +106,21 @@ int FFMemory::allocate_memory(int process_id, int num_units) {
 }
 
 int FFMemory::deallocate_mem(int process_id) {
+    cout << "CALLED DEALLOCATER!\n";
 	Node * walkPointer = front->next;
+	cout << "walkPointer made\n";
 	while (walkPointer->pid != process_id) {
 		walkPointer = walkPointer->next;
+        cout << "changed walkpointer location!\n";
 		if (walkPointer->next == NULL) {
+			cout << "\nDidnt find it";
 			return -1;
 		}
 	}
 	while (walkPointer->pid == process_id) {
+        cout << "DELETING " << process_id << endl;
 		walkPointer->pid = 0;
+        cout << "MOVING ON\n";
 		walkPointer = walkPointer->next;
 	}
 	return 1;
