@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BestFit-Memory.h" />
+    <ClInclude Include="FirstFit-Memory.h" />
+    <ClInclude Include="NextFit-Memory.h" />
+    <ClInclude Include="WorstFit-Memory.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tester.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CBE2EF7C-9694-4B28-AA3E-6DB5AEBA9440}</ProjectGuid>
     <RootNamespace>Simulation2</RootNamespace>
@@ -109,8 +118,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
