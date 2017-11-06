@@ -44,7 +44,6 @@ FFMemory::~FFMemory() {
 void FFMemory::initializeList() {
 	Node * newNode = new Node;
 	current = newNode;
-	//Node * currentNode = newNode;
 	front->next = newNode;
 	newNode->pid = 0;
 	newNode->next = NULL;
@@ -55,8 +54,6 @@ void FFMemory::initializeList() {
 		newNode->next = NULL;
 		current->next = newNode;
 		current = newNode;
-		//currentNode->next = newNode;
-		//currentNode = newNode;
 	}
 
 
@@ -96,8 +93,8 @@ int FFMemory::allocate_memory(int process_id, int num_units) {
 					walkPointer = walkPointer->next;
 				}
 				num_of_allocations++;
-				return nodesTraversed_local;
 				nodes_traversed += nodesTraversed_local;
+				return nodesTraversed_local;
 			}
 		
 		}
