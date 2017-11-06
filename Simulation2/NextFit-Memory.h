@@ -4,11 +4,10 @@
 using namespace std;
 
 
-struct Node {
-	int pid;
-
-	Node *next;
-};
+//struct Node {
+//	int pid;
+//	Node *next;
+//};
 
 class NFMemory {
 public:
