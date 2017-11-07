@@ -17,6 +17,7 @@ public:
 	void printList();
 	virtual int allocate_memory(int process_id, int num_units);
 	int deallocate_mem(int process_id);
+	int fragment_count();
 protected:
 	Node *front;
 	Node header;
@@ -65,6 +66,8 @@ void Memory::printList() {
 		cout << i << ": " << walkPointer->pid << endl;
 		walkPointer = walkPointer->next;
 	}
+
+	cout << "Number of Fragments: " << fragment_count() << endl << endl;
 }
 
 int Memory::allocate_memory(int process_id, int num_units) {
@@ -86,4 +89,36 @@ int Memory::deallocate_mem(int process_id) {
 		walkPointer = walkPointer->next;
 	}
 	return 1;
+}
+
+int Memory::fragment_count() {
+
+	Node * walkPointer = front->next;
+	int numHoles = 0;
+	int currentHole = 0;
+
+
+	while (walkPointer->next)
+	{
+		if (walkPointer->pid == 0) {
+			while (walkPointer->pid == 0) {
+				currentHole++;
+				if (walkPointer->next) {
+					walkPointer = walkPointer->next;
+				}
+				else break;
+			}
+
+			if (currentHole < 3 && currentHole > 0) {
+				numHoles++;
+			}
+
+		}
+
+		if (walkPointer->next) {
+			walkPointer = walkPointer->next;
+		}
+		else return numHoles;
+
+	}
 }
