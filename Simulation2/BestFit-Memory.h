@@ -14,11 +14,10 @@ public:
 
 int BestFit::allocate_memory(int process_id, int num_units) {
 	Node * walkPointer = front->next;
-	Node * checkPointer = walkPointer;
+	Node * nextStartPoint = walkPointer;
 	Node * bestLocation = NULL;
 	int allocateSize = 0;
 	int nodesTraversed_local = 0;
-	int currentBlockSize = 0;
 	int currentBestSize = INT_MAX;
 	bool bigEnough = false;
 
@@ -29,13 +28,12 @@ int BestFit::allocate_memory(int process_id, int num_units) {
 	}
 
 
-	for (int i = 0; i < numElements; i++) {
+	while (walkPointer->next) {
 
-
-		walkPointer = checkPointer;
+		walkPointer = nextStartPoint;
 		
 		// check if walkPointer is free
-		if (checkPointer->pid == 0) {
+		if (walkPointer->pid == 0) {
 
 			//Save starting location of empty block
 			current = walkPointer;
@@ -48,12 +46,16 @@ int BestFit::allocate_memory(int process_id, int num_units) {
 				allocateSize++;
 
 				// if the size is big enough
-				if (allocateSize >= num_units && allocateSize < currentBestSize) {
+				if (allocateSize >= num_units) {
 					bigEnough = true;
-					currentBlockSize = allocateSize;
 				}
 
-				if (walkPointer->next) {
+				if (walkPointer->next && walkPointer->next->pid != 0) {
+					nextStartPoint = walkPointer->next;
+					nodesTraversed_local++;
+					break;
+				}
+				else if (walkPointer->next) {
 					walkPointer = walkPointer->next;
 					nodesTraversed_local++;
 				}
@@ -61,13 +63,13 @@ int BestFit::allocate_memory(int process_id, int num_units) {
 			}
 
 			// change best size to new block size if it's smaller
-			if (bigEnough && currentBlockSize < currentBestSize) {
-				currentBestSize = currentBlockSize;
+			if (bigEnough && allocateSize < currentBestSize) {
+				currentBestSize = allocateSize;
 				bestLocation = current;
 			}
 
 			// if finished with list and a big enough space was found
-			if (bigEnough && i == 127) {
+			if (bigEnough && !walkPointer->next) {
 
 				// set walkPointer back to start of open space
 				walkPointer = bestLocation;
@@ -84,11 +86,9 @@ int BestFit::allocate_memory(int process_id, int num_units) {
 				return nodesTraversed_local;
 			}
 
-		}
-
-		// if pid found was not 0
-		if (checkPointer->next) {
-			checkPointer = checkPointer->next;
+		} else if (walkPointer->next) {
+			walkPointer = walkPointer->next;
+			nextStartPoint = walkPointer;
 			nodesTraversed_local++;
 		}
 	}

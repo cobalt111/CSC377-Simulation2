@@ -11,7 +11,6 @@ public:
 	~NextFit();
 	int allocate_memory(int process_id, int num_units) override;
 protected:
-	Node * tail;
 	Node * lastNode;
 };
 

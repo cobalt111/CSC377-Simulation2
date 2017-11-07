@@ -62,6 +62,15 @@ int main() {
 	cout << "PUTTING SIZE 3 IN NOW:\n";
 	newList.allocate_memory(4, 3);
 	newList.printList();
+	cout << "PUTTING SIZE 7 IN NOW:\n";
+	newList.allocate_memory(5, 7);
+	newList.printList();
+	cout << "GETTING RID OF PROCESS 4\n";
+	newList.deallocate_mem(4);
+	newList.printList();
+	cout << "PUTTING SIZE 3 IN NOW:\n";
+	newList.allocate_memory(6, 3);
+	newList.printList();
 
 
 	return 0;
