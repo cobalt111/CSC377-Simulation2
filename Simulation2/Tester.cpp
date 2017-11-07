@@ -45,7 +45,7 @@ int main() {
 	//newList.allocate_memory(4, 3);
 	//newList.printList();
 
-	BestFit newList;
+	WorstFit newList;
 	newList.initializeList();
 	cout << "THIS IS THE FIRST ALLOCATION I PROMISE:\n";
 	newList.allocate_memory(1, 8);
