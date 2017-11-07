@@ -48,8 +48,7 @@ int FirstFit::allocate_memory(int process_id, int num_units) {
 					bigEnough = true;
 					break;
 				}
-				else if (walkPointer->next != NULL) {
-
+				else if (walkPointer->next) {
 					walkPointer = walkPointer->next;
 					nodesTraversed_local++;
 				}
@@ -73,11 +72,12 @@ int FirstFit::allocate_memory(int process_id, int num_units) {
 				return nodesTraversed_local;
 			}
 
+		} else {
+			// if pid found was not 0
+			walkPointer = walkPointer->next;
+			nodesTraversed_local++;
 		}
 
-		// if pid found was not 0
-		walkPointer = walkPointer->next;
-		nodesTraversed_local++;
 	}
 
 	// upon failure to find space

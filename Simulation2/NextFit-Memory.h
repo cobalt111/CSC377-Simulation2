@@ -91,10 +91,12 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 			}
 	
 		}
+		else {
+			// if pid found was not 0
+			walkPointer = walkPointer->next;
+			nodesTraversed_local++;
+		}
 
-		// if pid found was not 0
-		walkPointer = walkPointer->next;
-		nodesTraversed_local++;
 	}
 
 	// upon failure to find space
