@@ -18,14 +18,16 @@ public:
 	void printList();
 	int allocate_memory(int process_id, int num_units);
 	int deallocate_mem(int process_id);
+	float avg_allocateTime();
+	float percent_denied();
  private:
 	Node *front;
 	Node header;
 	Node *current;
 	int numElements;
-	int num_of_allocations;
-	int nodes_traversed;
-	int denied_allocations;
+	float num_of_allocations;
+	float nodes_traversed;
+	float denied_allocations;
 };
 
 FFMemory::FFMemory() {
@@ -123,25 +125,42 @@ int FFMemory::allocate_memory(int process_id, int num_units) {
 }
 
 int FFMemory::deallocate_mem(int process_id) {
-    cout << "CALLED DEALLOCATER!\n";
+    //cout << "CALLED DEALLOCATER!\n";
 	Node * walkPointer = front->next;
-	cout << "walkPointer made\n";
+	//cout << "walkPointer made\n";
 	while (walkPointer->pid != process_id) {
 		walkPointer = walkPointer->next;
-        cout << "changed walkpointer location!\n";
+        //cout << "changed walkpointer location!\n";
 		if (walkPointer->next == NULL) {
-			cout << "\nDidnt find it";
+			//cout << "\nDidnt find it";
 			return -1;
 		}
 	}
 	while (walkPointer->pid == process_id) {
-        cout << "DELETING " << process_id << endl;
+        //cout << "DELETING " << process_id << endl;
 		walkPointer->pid = 0;
-        cout << "MOVING ON\n";
+        //cout << "MOVING ON\n";
         if (walkPointer->next == NULL){
             break;
         }
 		walkPointer = walkPointer->next;
 	}
 	return 1;
+}
+
+float FFMemory::avg_allocateTime(){
+    float average;
+    //cout << endl << nodes_traversed << endl;
+    //cout << num_of_allocations << endl;
+    average = nodes_traversed / num_of_allocations;
+    //cout << average;
+    return average;
+}
+
+
+float FFMemory::percent_denied(){
+    float percentage;
+    percentage = denied_allocations / (denied_allocations + num_of_allocations);
+    //cout << " " << denied_allocations << "/(" << denied_allocations << "+" << num_of_allocations << ")";
+    return percentage;
 }
