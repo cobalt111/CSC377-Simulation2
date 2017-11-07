@@ -36,6 +36,8 @@ int FirstFit::allocate_memory(int process_id, int num_units) {
 			//Save starting location of empty block
 			current = walkPointer;
 
+			allocateSize = 0;
+
 			// loop to check if the empty block is large enough
 			while (walkPointer->pid == 0) {
 

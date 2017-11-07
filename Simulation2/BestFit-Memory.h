@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <limits.h>
 #include "Memory.h"
 
 using namespace std;
@@ -13,9 +14,12 @@ public:
 
 int BestFit::allocate_memory(int process_id, int num_units) {
 	Node * walkPointer = front->next;
+	Node * checkPointer = walkPointer;
+	Node * bestLocation = NULL;
 	int allocateSize = 0;
 	int nodesTraversed_local = 0;
-	int currentBestSize = 0;
+	int currentBlockSize = 0;
+	int currentBestSize = INT_MAX;
 	bool bigEnough = false;
 
 
@@ -27,11 +31,16 @@ int BestFit::allocate_memory(int process_id, int num_units) {
 
 	for (int i = 0; i < numElements; i++) {
 
+
+		walkPointer = checkPointer;
+		
 		// check if walkPointer is free
-		if (walkPointer->pid == 0) {
+		if (checkPointer->pid == 0) {
 
 			//Save starting location of empty block
 			current = walkPointer;
+
+			allocateSize = 0;
 
 			// loop to check if the empty block is large enough
 			while (walkPointer->pid == 0) {
@@ -39,22 +48,29 @@ int BestFit::allocate_memory(int process_id, int num_units) {
 				allocateSize++;
 
 				// if the size is big enough
-				if (allocateSize == num_units) {
+				if (allocateSize >= num_units && allocateSize < currentBestSize) {
 					bigEnough = true;
-					break;
+					currentBlockSize = allocateSize;
 				}
-				else if (walkPointer->next != NULL) {
 
+				if (walkPointer->next) {
 					walkPointer = walkPointer->next;
 					nodesTraversed_local++;
 				}
+				else break;
 			}
 
-			// if a big enough block was found
-			if (bigEnough) {
+			// change best size to new block size if it's smaller
+			if (bigEnough && currentBlockSize < currentBestSize) {
+				currentBestSize = currentBlockSize;
+				bestLocation = current;
+			}
+
+			// if finished with list and a big enough space was found
+			if (bigEnough && i == 127) {
 
 				// set walkPointer back to start of open space
-				walkPointer = current;
+				walkPointer = bestLocation;
 
 				// fill in the open space with pid
 				for (int z = 0; z < num_units; z++) {
@@ -71,14 +87,15 @@ int BestFit::allocate_memory(int process_id, int num_units) {
 		}
 
 		// if pid found was not 0
-		walkPointer = walkPointer->next;
-		nodesTraversed_local++;
+		if (checkPointer->next) {
+			checkPointer = checkPointer->next;
+			nodesTraversed_local++;
+		}
 	}
 
 	// upon failure to find space
 	denied_allocations++;
 	return -1;
-}
 }
 
 
