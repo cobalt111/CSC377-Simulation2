@@ -100,7 +100,10 @@ int Memory::fragment_count() {
 
 	while (walkPointer->next)
 	{
+		// if a 0 is found
 		if (walkPointer->pid == 0) {
+
+			// loop to count the number of contiguous 0s
 			while (walkPointer->pid == 0) {
 				currentHole++;
 				if (walkPointer->next) {
@@ -109,9 +112,13 @@ int Memory::fragment_count() {
 				else break;
 			}
 
+			// if the number of contiguous 0s was 1 or 2
 			if (currentHole < 3 && currentHole > 0) {
 				numHoles++;
 			}
+
+			// reset counter
+			currentHole = 0;
 
 		}
 
