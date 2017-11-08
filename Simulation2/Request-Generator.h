@@ -6,46 +6,80 @@
 #include <vector>
 using namespace std;
 
-std::vector<int> process_vector;
+std::vector<int> process_vectorFF;
+std::vector<int> process_vectorNF;
 //srand(time(NULL)));
 
-int addProcess(int process_id){
-    process_vector.push_back(process_id);
+int addProcessFF(int process_id){
+    process_vectorFF.push_back(process_id);
 }
 
-void removeProcess(int processLocation){
-    cout << "Remove element " << processLocation << endl;
-    process_vector.erase(process_vector.begin()+processLocation);
+int addProcessNF(int process_id){
+    process_vectorNF.push_back(process_id);
+}
+
+void removeProcessFF(int processLocation){
+    //cout << "Remove element " << processLocation << endl;
+    process_vectorFF.erase(process_vectorFF.begin()+processLocation);
+}
+
+void removeProcessNF(int processLocation){
+    //cout << "Remove element " << processLocation << endl;
+    process_vectorNF.erase(process_vectorNF.begin()+processLocation);
 }
 
 int generateRequest(){
-    return (rand() % 2);
+    return (rand() % 3);
 }
 
 int generate_processSize(){
     return ((rand() % 7) + 3);
 }
 
-int generate_deallocateNum(){
+int generate_deallocateNumFF(){
     int number, process;
-    if (process_vector.size() == 0){
-        cout << "No Processes Running!" << endl;
+    if (process_vectorFF.size() == 0){
+        //cout << "No Processes Running!" << endl;
         return -1;
     }
-    number = ((rand() % process_vector.size()));
+    number = ((rand() % process_vectorFF.size()));
 
-    cout << "Number in process list is: " << number << endl;
-    cout << "Process ID is : " << process_vector[number] << endl;
-    process = process_vector[number];
-    removeProcess(number);
+    //cout << "Number in process list is: " << number << endl;
+    //cout << "Process ID is : " << process_vector[number] << endl;
+    process = process_vectorFF[number];
+    removeProcessFF(number);
 
     return process;
 }
 
-void printProcessList(){
+int generate_deallocateNumNF(){
+    int number, process;
+    if (process_vectorNF.size() == 0){
+        //cout << "No Processes Running!" << endl;
+        return -1;
+    }
+    number = ((rand() % process_vectorNF.size()));
+
+    //cout << "Number in process list is: " << number << endl;
+    //cout << "Process ID is : " << process_vector[number] << endl;
+    process = process_vectorNF[number];
+    removeProcessNF(number);
+
+    return process;
+}
+
+void printProcessListFF(){
     cout << "Process list is:";
-    for (int i=0; i < process_vector.size(); i++){
-        cout << ' ' << process_vector[i];
+    for (int i=0; i < process_vectorFF.size(); i++){
+        cout << ' ' << process_vectorFF[i];
+    }
+    cout << endl;
+}
+
+void printProcessListNF(){
+    cout << "Process list is:";
+    for (int i=0; i < process_vectorNF.size(); i++){
+        cout << ' ' << process_vectorNF[i];
     }
     cout << endl;
 }
