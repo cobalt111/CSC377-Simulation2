@@ -9,12 +9,12 @@
 
 int main(){
     srand(time( NULL ));
-    FirstFit ffMemory;
+    NextFit ffMemory;
     ffMemory.initializeList();
     int placeholder, successTester;
     //int deallocate = 0, allocate = 0, allocateSuccess = 0;
 
-    for(int i = 1; i < 50001; i++){
+    for(int i = 1; i < 5001; i++){
         cout << "Loop: " << i << endl;
         if(generateRequest() == 1){
             //allocate++;

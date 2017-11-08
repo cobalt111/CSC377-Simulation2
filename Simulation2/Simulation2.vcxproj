@@ -26,7 +26,7 @@
     <ClInclude Include="WorstFit-Memory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Tester.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CBE2EF7C-9694-4B28-AA3E-6DB5AEBA9440}</ProjectGuid>

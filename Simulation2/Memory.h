@@ -29,7 +29,8 @@ protected:
 };
 
 Memory::Memory() {
-	front = current = &header;
+	front = &header;
+	current = header.next;
 	header.next = NULL;
 	numElements = 128;
 	num_of_allocations = 0;

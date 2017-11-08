@@ -56,7 +56,7 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 					bigEnough = true;
 					break;
 				}
-				else if (walkPointer->next) {
+				else if (walkPointer->next != NULL) {
 					walkPointer = walkPointer->next;
 					nodesTraversed_local++;
 				}
@@ -74,8 +74,12 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 
 				// fill in the open space with pid
 				for (int z = 0; z < num_units; z++) {
-					walkPointer->pid = process_id;
-					walkPointer = walkPointer->next;
+					if (walkPointer->next != NULL) {
+						walkPointer->pid = process_id;
+						walkPointer = walkPointer->next;
+					}
+					else break;
+
 
 
 					// set lastNode to the next node after the allocated memory
@@ -91,10 +95,15 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 			}
 	
 		}
-		else {
+		else if (walkPointer->next != NULL) {
+
 			// if pid found was not 0
 			walkPointer = walkPointer->next;
 			nodesTraversed_local++;
+		}
+		else {
+			denied_allocations++;
+			return -1;
 		}
 
 	}

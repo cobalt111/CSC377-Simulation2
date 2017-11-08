@@ -9,7 +9,7 @@ using namespace std;
 std::vector<int> process_vector;
 //srand(time(NULL)));
 
-int addProcess(int process_id){
+void addProcess(int process_id){
     process_vector.push_back(process_id);
 }
 
@@ -44,7 +44,7 @@ int generate_deallocateNum(){
 
 void printProcessList(){
     cout << "Process list is:";
-    for (int i=0; i < process_vector.size(); i++){
+    for (unsigned i=0; i < process_vector.size(); i++){
         cout << ' ' << process_vector[i];
     }
     cout << endl;
