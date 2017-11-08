@@ -2,6 +2,9 @@
 #include <cstdlib>
 #include "FirstFit-Memory.h"
 #include "NextFit-Memory.h"
+#include "BestFit-Memory.h"
+#include "WorstFit-Memory.h"
+
 using namespace std;
 
 int generateAllocate_Deallocate(){
@@ -73,6 +76,7 @@ int main() {
 //	cout << "PUTTING SIZE 3 IN NOW:\n";
 //	nfList.allocate_memory(4, 3);
 //	nfList.printList();
+
 
 
 	return 0;

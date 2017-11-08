@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="BestFit-Memory.h" />
     <ClInclude Include="FirstFit-Memory.h" />
+    <ClInclude Include="Memory.h" />
     <ClInclude Include="NextFit-Memory.h" />
     <ClInclude Include="WorstFit-Memory.h" />
   </ItemGroup>

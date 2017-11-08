@@ -5,6 +5,7 @@
 
 
 
+
 using namespace std;
 
 class FirstFit : public Memory {
@@ -48,6 +49,7 @@ int FirstFit::allocate_memory(int process_id, int num_units) {
 					bigEnough = true;
 					break;
 				}
+
 				else if (walkPointer->next != NULL) {
 					walkPointer = walkPointer->next;
 					nodesTraversed_local++;
@@ -56,6 +58,7 @@ int FirstFit::allocate_memory(int process_id, int num_units) {
                     denied_allocations++;
                     return -1;
                 }
+
 			}
 
 			// if a big enough block was found
@@ -77,6 +80,7 @@ int FirstFit::allocate_memory(int process_id, int num_units) {
 			}
 
 		} else {
+
 			// if pid found was not 0
 			if (walkPointer->next != NULL){
                 walkPointer = walkPointer->next;
@@ -85,6 +89,7 @@ int FirstFit::allocate_memory(int process_id, int num_units) {
 			else{
                 return -1;
 			}
+
 		}
 
 	}
@@ -190,7 +195,7 @@ int FirstFit::allocate_memory(int process_id, int num_units) {
 //				nodes_traversed += nodesTraversed_local;
 //				return nodesTraversed_local;
 //			}
-//
+
 //		}
 //		walkPointer = walkPointer->next;
 //		nodesTraversed_local++;
@@ -212,4 +217,4 @@ int FirstFit::allocate_memory(int process_id, int num_units) {
 //		walkPointer = walkPointer->next;
 //	}
 //	return 1;
-//}
+
