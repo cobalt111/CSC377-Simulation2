@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include <iostream>
@@ -233,3 +234,4 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 //	}
 //	return 1;
 //}
+

@@ -145,4 +145,3 @@ int Memory::fragment_count() {
 	}
 	return numHoles;
 }
-
