@@ -11,11 +11,11 @@ std::vector<int> process_vectorFF;
 std::vector<int> process_vectorNF;
 //srand(time(NULL)));
 
-int addProcessFF(int process_id){
+void addProcessFF(int process_id){
     process_vectorFF.push_back(process_id);
 }
 
-int addProcessNF(int process_id){
+void addProcessNF(int process_id){
     process_vectorNF.push_back(process_id);
 }
 
