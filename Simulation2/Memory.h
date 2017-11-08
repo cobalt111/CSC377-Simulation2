@@ -63,11 +63,16 @@ void Memory::printList() {
 	Node * walkPointer = front;
 	walkPointer = walkPointer->next;
 	for (int i = 0; i < numElements; i++) {
-		cout << i << ": " << walkPointer->pid << endl;
+
+		cout << i << ":\t" << walkPointer->pid << endl;
 		walkPointer = walkPointer->next;
 	}
 
-	cout << "Number of Fragments: " << fragment_count() << endl << endl;
+	//cout << "Number of Fragments: " << fragment_count() << endl;
+	//cout << "Number of Denied Allocations: " << denied_allocations << endl;
+	//cout << "Number of Successful Allocations: " << num_of_allocations << endl << endl;
+	cout << endl;
+
 }
 
 int Memory::allocate_memory(int process_id, int num_units) {
@@ -85,8 +90,12 @@ int Memory::deallocate_mem(int process_id) {
 		}
 	}
 	while (walkPointer->pid == process_id) {
+
 		walkPointer->pid = 0;
-		walkPointer = walkPointer->next;
+		if(walkPointer->next == NULL)
+            return 1;
+        walkPointer = walkPointer->next;
+
 	}
 	return 1;
 }
@@ -98,7 +107,9 @@ int Memory::fragment_count() {
 	int currentHole = 0;
 
 
-	while (walkPointer->next)
+
+	while (walkPointer->next != NULL)
+
 	{
 		// if a 0 is found
 		if (walkPointer->pid == 0) {
@@ -106,14 +117,19 @@ int Memory::fragment_count() {
 			// loop to count the number of contiguous 0s
 			while (walkPointer->pid == 0) {
 				currentHole++;
-				if (walkPointer->next) {
+
+				if (walkPointer->next != NULL) {
+
 					walkPointer = walkPointer->next;
 				}
 				else break;
 			}
 
 			// if the number of contiguous 0s was 1 or 2
+
 			if (currentHole < 3 && currentHole > 0) {
+                //cout << "FRAGMENT FOUND!" << endl;
+
 				numHoles++;
 			}
 
@@ -122,10 +138,13 @@ int Memory::fragment_count() {
 
 		}
 
-		if (walkPointer->next) {
+		if (walkPointer->next != NULL) {
 			walkPointer = walkPointer->next;
 		}
-		else return numHoles;
+		else
+            return numHoles;
 
 	}
+	return numHoles;
 }
+
