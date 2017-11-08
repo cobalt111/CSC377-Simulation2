@@ -29,8 +29,7 @@ protected:
 };
 
 Memory::Memory() {
-	front = &header;
-	current = header.next;
+	front = current = &header;
 	header.next = NULL;
 	numElements = 128;
 	num_of_allocations = 0;
@@ -85,18 +84,16 @@ int Memory::allocate_memory(int process_id, int num_units) {
 int Memory::deallocate_mem(int process_id) {
 	Node * walkPointer = front->next;
 	while (walkPointer->pid != process_id) {
-		walkPointer = walkPointer->next;
-		if (walkPointer->next == NULL) {
-			return -1;
-		}
+		if(walkPointer->next != NULL){walkPointer = walkPointer->next;}
+		else{return -1;}
 	}
+
 	while (walkPointer->pid == process_id) {
-
+        cout << "Deallocating Process ID " << process_id << endl;
 		walkPointer->pid = 0;
-		if(walkPointer->next == NULL)
-            return 1;
-        walkPointer = walkPointer->next;
-
+		//if(walkPointer->next == NULL) {break;}
+        if(walkPointer->next != NULL){walkPointer = walkPointer->next;}
+        else{break;}
 	}
 	return 1;
 }
@@ -148,4 +145,3 @@ int Memory::fragment_count() {
 	}
 	return numHoles;
 }
-

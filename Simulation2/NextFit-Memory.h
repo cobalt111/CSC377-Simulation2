@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include <iostream>
@@ -42,7 +43,7 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 		if (walkPointer->pid == 0) {
 
 			//Save starting location of empty block
-			current = walkPointer; 
+			current = walkPointer;
 
 			allocateSize = 0;
 
@@ -50,7 +51,7 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 			while (walkPointer->pid == 0 && walkPointer->next != current) {
 
 				allocateSize++;
-				
+
 				// if the size is big enough
 				if (allocateSize == num_units) {
 					bigEnough = true;
@@ -74,18 +75,11 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 
 				// fill in the open space with pid
 				for (int z = 0; z < num_units; z++) {
-					if (walkPointer->next != NULL) {
-						walkPointer->pid = process_id;
+                    walkPointer->pid = process_id;
+					if (walkPointer->next != NULL){
 						walkPointer = walkPointer->next;
 					}
 					else break;
-
-
-
-					// set lastNode to the next node after the allocated memory
-					if (z == num_units - 1) {
-						lastNode = walkPointer;
-					}
 				}
 
 				num_of_allocations++;
@@ -93,7 +87,7 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 
 				return nodesTraversed_local;
 			}
-	
+
 		}
 		else if (walkPointer->next != NULL) {
 
@@ -133,7 +127,7 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 //	Node *front;
 //	Node header;
 //	Node *current;
-//	// need lastNode pointer from previous nextfit 
+//	// need lastNode pointer from previous nextfit
 //	Node * lastNode;
 //	int numElements;
 //	int num_of_allocations;
@@ -240,3 +234,4 @@ int NextFit::allocate_memory(int process_id, int num_units) {
 //	}
 //	return 1;
 //}
+
