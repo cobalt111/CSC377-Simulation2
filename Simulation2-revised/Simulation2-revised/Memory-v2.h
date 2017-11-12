@@ -1,7 +1,4 @@
 #pragma once
-#include <iostream>
-using namespace std;
-
 //Struct that will be the building block of the memory linked list.
 struct Node{
     int process_id;             //Used to determine if a process is currently occupying this struct block. -1 means that the block is currently not in use.
@@ -110,7 +107,7 @@ int Memory::allocate_mem(int process_id, int num_units){
 
 int Memory::deallocate_mem(int process_id){
     walkList_ptr = front_ptr;
-
+    total_deallocations++;
     while(walkList_ptr != NULL && walkList_ptr->process_id != process_id){
         //check to see that we haven't ran into the end of the list without finding the pid
 
@@ -120,7 +117,6 @@ int Memory::deallocate_mem(int process_id){
     //Check to make sure there wasn't a failure. If there was don't continue.
     if(walkList_ptr == NULL){
         walkList_ptr = front_ptr;
-        total_deallocations++;
         return -1;
     }
     //If  you have found the section to be removed then replace them.
@@ -130,7 +126,6 @@ int Memory::deallocate_mem(int process_id){
     }
     //Reset walkList_ptr for the next allocate/deallocate
     walkList_ptr = front_ptr;
-    total_deallocations++;
     return 1;
 }
 

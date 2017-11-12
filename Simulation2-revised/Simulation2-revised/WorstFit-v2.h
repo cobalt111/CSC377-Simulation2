@@ -1,11 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <limits.h>
 #include "Memory-v2.h"
-
-using namespace std;
-
 
 class WFMemory : public Memory {
 public:
@@ -13,7 +9,7 @@ public:
 };
 
 int WFMemory::allocate_mem(int process_id, int num_units) {
-
+    num_of_allocations++;
 	walkList_ptr = front_ptr;
 	Node * nextStartPoint = walkList_ptr;
 	Node * bestLocation = NULL;
@@ -93,12 +89,10 @@ int WFMemory::allocate_mem(int process_id, int num_units) {
 			}
 		}
 
-		num_of_allocations++;
 		nodes_traversed += nodesTraversed_local;
 		return nodesTraversed_local;
 	}
 	else {
-		num_of_allocations++;
 		denied_allocations++;
 		return -1;
 	}

@@ -18,6 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BestFit-v2.h" />
+    <ClInclude Include="FirstFit-v2.h" />
+    <ClInclude Include="Memory-v2.h" />
+    <ClInclude Include="NextFit-v2.h" />
+    <ClInclude Include="request_generator.h" />
+    <ClInclude Include="statistics_handler.h" />
+    <ClInclude Include="WorstFit-v2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="memorytester.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{5BEA4E86-E720-4A6D-96AD-0396A076D812}</ProjectGuid>
@@ -110,16 +122,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="BestFit-v2.h" />
-    <ClInclude Include="FirstFit-v2.h" />
-    <ClInclude Include="Memory-v2.h" />
-    <ClInclude Include="NextFit-v2.h" />
-    <ClInclude Include="WorstFit-v2.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="memorytester.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

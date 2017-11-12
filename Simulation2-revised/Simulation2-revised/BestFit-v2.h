@@ -1,11 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <limits.h>
 #include "Memory-v2.h"
-
-using namespace std;
-
 
 class BFMemory : public Memory {
 public:
@@ -13,7 +9,7 @@ public:
 };
 
 int BFMemory::allocate_mem(int process_id, int num_units) {
-
+    num_of_allocations++;
 	walkList_ptr = front_ptr;
 	Node * nextStartPoint = walkList_ptr;
 	Node * bestLocation = NULL;
@@ -36,7 +32,7 @@ int BFMemory::allocate_mem(int process_id, int num_units) {
 		walkList_ptr = nextStartPoint;
 
 		currentBigEnough = false;
-		
+
 		// check if walkList_ptr is free
 		if (walkList_ptr->process_id == -1) {
 
@@ -71,7 +67,7 @@ int BFMemory::allocate_mem(int process_id, int num_units) {
 				currentBestSize = allocateSize;
 				bestLocation = emptyBlock_ptr;
 			}
-		} 
+		}
 		else if (walkList_ptr->next != NULL) {
 			walkList_ptr = walkList_ptr->next;
 			nextStartPoint = walkList_ptr;
@@ -93,17 +89,15 @@ int BFMemory::allocate_mem(int process_id, int num_units) {
 			}
 		}
 
-		num_of_allocations++;
 		nodes_traversed += nodesTraversed_local;
 		return nodesTraversed_local;
 	}
 	else {
-		num_of_allocations++;
 		denied_allocations++;
 		return -1;
 	}
 
-	
+
 
 	// upon failure to find space
 	return -1;
