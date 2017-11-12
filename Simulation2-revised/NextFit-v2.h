@@ -1,23 +1,28 @@
 #pragma once
-#include <iostream>
+
 #include "Memory-v2.h"
-using namespace std;
 
 class NFMemory : public Memory{
 public:
     NFMemory();
-    int allocate_mem(int process_id, int num_units);
+	~NFMemory();
+    int allocate_mem(int process_id, int num_units) override;
 private:
     Node* lastPos_ptr;
 };
 
-NFMemory::NFMemory(){
+NFMemory::NFMemory(): Memory() {
     lastPos_ptr = front_ptr;
+}
+
+NFMemory::~NFMemory()
+{
 }
 
 
 int NFMemory::allocate_mem(int process_id, int num_units){
     //Set the pointer that will be used to walk through the loop equal to the pointer that stores the location we last stopped at.
+    num_of_allocations++;
     walkList_ptr = lastPos_ptr;
     //allocateSize will be used to count the size of empty blocks. nodesTraversed_local will be returned as specified
     //pastPtr_checker is for the unique case that the lastPos ptr is in the middle of an empty stop preventing potential false
@@ -65,8 +70,8 @@ int NFMemory::allocate_mem(int process_id, int num_units){
                     }
                     //This subsequent logic handles the two cases of passing or failure. If it failed then we break the entire allocation
                     //Process returning the necessary information and increasing stat counters.
+					//This if statement checks to see if the found size is not big enough
                     if((pastPtr_checker + allocateSize) < num_units){
-                        num_of_allocations++;
                         denied_allocations++;
                         return -1;
                     }
@@ -82,7 +87,6 @@ int NFMemory::allocate_mem(int process_id, int num_units){
                         if(walkList_ptr == NULL){
                             walkList_ptr = front_ptr;
                         }
-                        num_of_allocations++;
                         nodes_traversed += nodesTraversed_local;
                         lastPos_ptr = walkList_ptr;
                         return nodesTraversed_local;
@@ -101,7 +105,6 @@ int NFMemory::allocate_mem(int process_id, int num_units){
                 if(walkList_ptr == NULL){
                     walkList_ptr = front_ptr;
                 }
-                num_of_allocations++;
                 nodes_traversed += nodesTraversed_local;
                 lastPos_ptr = walkList_ptr;
                 return nodesTraversed_local;
@@ -111,7 +114,6 @@ int NFMemory::allocate_mem(int process_id, int num_units){
             //we hit lastPos ptr meaning there wasn't a space large enough.
             if(walkList_ptr == NULL){
                 if(startedAgain){
-                    num_of_allocations++;
                     denied_allocations++;
                     return -1;
                 }
@@ -138,7 +140,6 @@ int NFMemory::allocate_mem(int process_id, int num_units){
 
         if(walkList_ptr == NULL){
                 if(startedAgain){
-                    num_of_allocations++;
                     denied_allocations++;
                     return -1;
                 }

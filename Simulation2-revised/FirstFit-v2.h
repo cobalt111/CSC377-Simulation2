@@ -1,16 +1,15 @@
 #pragma once
-#include <iostream>
+
 #include "Memory-v2.h"
-using namespace std;
 
 class FFMemory : public Memory{
 public:
-    int allocate_mem(int process_id, int num_units);
+    int allocate_mem(int process_id, int num_units) override;
 private:
 };
 
 int FFMemory::allocate_mem(int process_id, int num_units){
-
+    num_of_allocations++;
     walkList_ptr = front_ptr;
     int allocateSize = 0, nodesTraversed_local = 0;
 
@@ -22,7 +21,6 @@ int FFMemory::allocate_mem(int process_id, int num_units){
 
         if(walkList_ptr == NULL){
             denied_allocations++;
-            num_of_allocations++;
             return -1;
         }
 
@@ -44,14 +42,12 @@ int FFMemory::allocate_mem(int process_id, int num_units){
                     walkList_ptr = walkList_ptr->next;
                     allocateSize--;
                 }
-                num_of_allocations++;
                 nodes_traversed += nodesTraversed_local;
                 return nodesTraversed_local;
             }
 
             if(walkList_ptr == NULL){
                 denied_allocations++;
-                num_of_allocations++;
                 return -1;
             }
 
