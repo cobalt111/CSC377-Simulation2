@@ -37,7 +37,7 @@ int main(){
     ffMemory.calculate_percentage_denied();
     cout << "Average Amount of Fragmentations = " << ffMemory.get_average_fragmentation() << endl;
     cout << "Average Allocation Time = " << ffMemory.get_average_allocationTime() << endl;
-    cout << "Percentage Denied = " << ffMemory.get_percentage_denied();
+    cout << "Percentage Denied = " << ffMemory.get_percentage_denied() << endl;
 
     //Next Fit Display
     cout << "\nNext Fit:" << endl;
@@ -52,7 +52,7 @@ int main(){
     cout << "Percentage Denied = " << nfMemory.get_percentage_denied() << endl;
     cout << "Total allocations = " << nfMemory.get_totalAllocations() << endl;
     cout << "Total denied allocations = " << nfMemory.get_totalDeniedAllocations() << endl;
-    cout << "Total deallocations = " << nfMemory.get_totalDeallocations();
+    cout << "Total deallocations = " << nfMemory.get_totalDeallocations() << endl;
 
 	//Best Fit Display
 	cout << "\nBest Fit:" << endl;
@@ -67,7 +67,7 @@ int main(){
 	cout << "Percentage Denied = " << bfMemory.get_percentage_denied() << endl;
 	cout << "Total allocations = " << bfMemory.get_totalAllocations() << endl;
 	cout << "Total denied allocations = " << bfMemory.get_totalDeniedAllocations() << endl;
-	cout << "Total deallocations = " << bfMemory.get_totalDeallocations();
+	cout << "Total deallocations = " << bfMemory.get_totalDeallocations() << endl;
 
 	//Worst Fit Display
 	cout << "\nWorst Fit:" << endl;
@@ -82,7 +82,7 @@ int main(){
 	cout << "Percentage Denied = " << wfMemory.get_percentage_denied() << endl;
 	cout << "Total allocations = " << wfMemory.get_totalAllocations() << endl;
 	cout << "Total denied allocations = " << wfMemory.get_totalDeniedAllocations() << endl;
-	cout << "Total deallocations = " << wfMemory.get_totalDeallocations();
+	cout << "Total deallocations = " << wfMemory.get_totalDeallocations() << endl;
 
 
     return 0;
@@ -95,7 +95,7 @@ void generator(FFMemory& ffMemory, NFMemory& nfMemory, BFMemory & bfMemory, WFMe
     std::vector<int> process_vectorNF;
 	std::vector<int> process_vectorBF;
 	std::vector<int> process_vectorWF;
-    for(int i = 0; i < 50000; i++){
+    for(int i = 0; i < 10000; i++){
         placeholder = rand() % 3;
         if(placeholder != 0){
             randnum = (rand() % 7) + 3;
