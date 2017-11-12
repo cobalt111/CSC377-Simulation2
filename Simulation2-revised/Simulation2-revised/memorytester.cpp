@@ -70,7 +70,7 @@ int main(){
 	cout << "Total deallocations = " << bfMemory.get_totalDeallocations();
 
 	//Worst Fit Display
-	cout << "\nBest Fit:" << endl;
+	cout << "\nWorst Fit:" << endl;
 	wfMemory.print_list();
 	cout << endl << "Statistics: " << endl;
 	cout << "Current Fragmentations: " << wfMemory.fragment_count() << endl;
@@ -95,7 +95,7 @@ void generator(FFMemory& ffMemory, NFMemory& nfMemory, BFMemory & bfMemory, WFMe
     std::vector<int> process_vectorNF;
 	std::vector<int> process_vectorBF;
 	std::vector<int> process_vectorWF;
-    for(int i = 0; i < 10000; i++){
+    for(int i = 0; i < 50000; i++){
         placeholder = rand() % 3;
         if(placeholder != 0){
             randnum = (rand() % 7) + 3;
