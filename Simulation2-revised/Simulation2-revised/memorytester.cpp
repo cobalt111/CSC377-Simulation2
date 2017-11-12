@@ -25,22 +25,22 @@ int main(){
     generator(ffMemory, nfMemory, bfMemory, wfMemory, generation_num);
     cout << "Statistics with " << generation_num << " generations:\n\n";
     //First Fit Display
-    cout << "First Fit:";
+    cout << "First Fit:" << endl;
     ffMemory.print_list();
     display_ff(ffMemory);
 
     //Next Fit Display
-    cout << "\nNext Fit:";
+    cout << "\nNext Fit:" << endl;
     nfMemory.print_list();
     display_nf(nfMemory);
 
     //Best Fit Display
-    cout << "\nBest Fit:";
+    cout << "\nBest Fit:" << endl;
     bfMemory.print_list();
     display_bf(bfMemory);
 
     //Worst Fit Display
-    cout << "\nWorst Fit:";
+    cout << "\nWorst Fit:" << endl;
     wfMemory.print_list();
     display_wf(wfMemory);
     cout << endl;
