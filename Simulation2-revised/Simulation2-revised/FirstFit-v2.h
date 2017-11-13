@@ -11,7 +11,7 @@ private:
 int FFMemory::allocate_mem(int process_id, int num_units){
     num_of_allocations++;
     walkList_ptr = front_ptr;
-    int allocateSize = 0, nodesTraversed_local = 0;
+    int allocateSize = 0, nodesTraversed_local = 1;
 
     if (num_units < 3 || num_units > 10) { return -1; }
 

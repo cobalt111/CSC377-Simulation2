@@ -78,6 +78,7 @@ int NextFit::allocate_memory(int process_id, int num_units) {
                     walkPointer->pid = process_id;
 					if (walkPointer->next != NULL){
 						walkPointer = walkPointer->next;
+						lastNode = walkPointer;
 					}
 					else break;
 				}

@@ -14,7 +14,7 @@ int WFMemory::allocate_mem(int process_id, int num_units) {
 	Node * nextStartPoint = walkList_ptr;
 	Node * bestLocation = NULL;
 	int allocateSize = 0;
-	int nodesTraversed_local = 0;
+	int nodesTraversed_local = 1;
 	int currentWorstSize = INT_MIN;
 	bool currentBigEnough = false;
 	bool bigEnough = false;
