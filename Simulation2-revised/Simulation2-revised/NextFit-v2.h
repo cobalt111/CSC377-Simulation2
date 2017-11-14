@@ -27,7 +27,7 @@ int NFMemory::allocate_mem(int process_id, int num_units){
     //allocateSize will be used to count the size of empty blocks. nodesTraversed_local will be returned as specified
     //pastPtr_checker is for the unique case that the lastPos ptr is in the middle of an empty stop preventing potential false
     //denied allocations
-    int allocateSize = 0, nodesTraversed_local = 0, pastPtr_checker = 0;
+    int allocateSize = 0, nodesTraversed_local = 1, pastPtr_checker = 0;
     //Start again keeps track of whether we have looped around already or not, to prevent an infinite loop.
     bool startedAgain = false;
 
