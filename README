@@ -1,0 +1,23 @@
+Group: Tim Cox, Justen Caldwell, Brandon Robertson, Nick Gauthier
+
+Simulation 2
+
+A BRIEF DISCRIPTION:
+  Our simulation used an automatically allocated linked list with 128 nodes total. Each node has a pointer that points to the next node in the list, and a process id variable that is used to represent what process owns that node. Each node is of size 2kB, meaning that the entire 128 node list is equal to (128 * 2) 256kB of data, just as requested. Also, the 6kB - 20kB process size limitations are enforced in the allocation algorithms themselves. As for the structure of our simulated memory, we used a parent "Memory" class that all the allocation algorithms inherit from. The only functions and variables that each of the separate child classes have are what is necessary to make the allocation for that algorithm work. For example, best and worst fit have additional pointers that help make use of storing the current best, or worst, place on the list.
+    Our request generator has a few restrictions that we implemented to make it seem like there was a fair balance that allowed for the differences between algorithms to be noticed. One of these restrictions is a bias towards allocating over deallocating. Another is making use of process id vectors and only deallocating processes that are currently on the memory stack. Each of these process lists are separate from the other sorting algorithms, because they could accept and reject under the different circumstances throughout execution. We implemented the randomization this way mainly because when we did not, things would very rarely get deallocated based on the random number. This means that deallocations allow for more processes entering and exiting the memory, showing better how the algorithms differed. There are of course some assumptions we had to make about the assignment, which might set our project apart from others. They are listed below.
+    
+ASSUMPTIONS:
+  1. Nodes traversed only counted when trying to find a spot, not when seeing if the spot was large enough, or when allocating the process. Our reasoning behind this is that we wanted to measure how long it took the algorithm before it found a spot that was the needed size. This of course means that best-fit and worst-fit will always have an allocation-time of 128 nodes, because it always traverses the entire list before fully deciding on a spot.
+  2. You did not want any reporting on the average size of a process. This is mainly because it isn't listed in the requirements at all, but we personally would have found that to be a useful statistic.
+  3. You did not want process that were previously denied having a chance to reattempt allocation. This is because it makes our random generator much easier to program and test thoroughly.
+  4. -1 would never be a valid process ID. We must assume this because -1 is our memory's "special character" if it is thought of in the sense of Windows DOS's Fat file system. We use -1 in the program to denote that a process is available and ready to be written over.
+  5. We didn't have to implement any sort of defragmenting algorithm ever. Again, this is never mentioned, but personally we think it would have really changed the numbers we saw in the statistics.
+
+CONCLUSION:
+  Simulating this different allocation algorithms have taught us quite a few things about how each one stacks up against the others. When running the program and looking at the final statistics for 10000 allocations/deallocations there are a few things that can be noted. First Fit has a slightly lower average number of fragmentations, but at the cost of being nearly 2x slower than next-fit. All the algorithms have very similar percentages of accepted allocations. Best-fit is just strictly better than worst-fit, and probably the overall best algorithm for space, if you can accept that it must walk through the entire memory list each time. My overall pick would have to be next-fit if I had to choose one of the four as a winner.
+  
+  
+BUGS:
+There are some bugs that we cannot seem to be rid of. The known ones are listed below:
+*Allocation/Deallocation numbers sometimes don't add up to the simulation total (9997 instead of 10000). Can't figure out why it's doing this considering those 2 numbers are allocated at the very start of the allocation/deallocation process. we just must assume there is a rare case that the function isn't called.
+*Possible Infinite Loop/ Crash when running very high numbers of simulations (>1000000). This is more than likely caused by the nextfit function due to its sheer size and complexity, but we can't seem to find the rare case where it would get stuck in a loop (We thought every case was already covered at some point).
